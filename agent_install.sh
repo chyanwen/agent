@@ -5,13 +5,13 @@ host_name=`hostname | awk -F'.localdomain' '{print $1}'`
 cd /home/work/open-falcon/agent/
 mkdir ../conf
 sed -i "s/open-falcon/chyanwen/g" cfg.json
-./control start
+./control restart
 sleep 5
 port=`netstat -ntulp | grep 1988 | awk -F ':::' '{print $2}'`
 if [ ${port} = "1988" ];then
-     echo "agent started!"
+     echo "agent restarted!"
 else
-     echo "agent started failed!"
+     echo "agent restarted failed!"
      exit 2
 fi
 
