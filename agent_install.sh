@@ -1,7 +1,5 @@
 #!/bin/bash
 
-ip=`ifconfig|egrep 'inet (addr:){0,1}192\.168|inet (addr:){0,1}10|inet (addr:){0,1}172\.1[6-9]|inet (addr:){0,1}172\.2[0-9]|inet (addr:){0,1}172\.3[01]'| awk '{print $2}'| awk -F':' '{if ($1=="addr"){print $2} else {print $1}}' | head -n 1`
-host_name=`hostname | awk -F'.localdomain' '{print $1}'`
 cd /home/work/open-falcon/agent/
 mkdir ../conf
 sed -i "s/open-falcon/chyanwen/g" cfg.json
@@ -30,6 +28,7 @@ else
 fi
 
 echo "update the plugin scripts!"
+rm -rf plugin
 curl http://127.0.0.1:1988/plugin/update &>/dev/null
 if [ $? -eq 0 ];then
 	echo "Update the plugin scritpts success!"
